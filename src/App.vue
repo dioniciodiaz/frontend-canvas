@@ -12,6 +12,7 @@
         >
             <span slot="app-logo">KANVAS</span>
         </app-sidebar>
+        <subscription-bar v-if="isSubscriptionBased && $route.meta && $route.meta.requiresAuth == undefined" />
         <div class="page-container">
             <app-header
                 v-if="$route.meta && $route.meta.requiresAuth == undefined && companyData"
@@ -26,8 +27,8 @@
                 @selected-company="switchCompany"
             />
             <div class="page-content-wrapper animated">
-                <div class="content sm-gutter">
-                    <subscription-bar v-if="isSubscriptionBased && $route.meta && $route.meta.requiresAuth == undefined" />
+                <!-- Should bind dynamic style in padding top based on the subscription bar being showed -->
+                <div :style="{ 'padding-top' : 90 + 'px'}" class="content sm-gutter">
                     <router-view
                         :app-settings="appSettings"
                         class="container-fluid container-fixed-lg"
@@ -177,7 +178,6 @@ export default {
 
             .content {
                 z-index: 10;
-                padding-top: 90px;
                 padding-bottom: 70px;
                 min-height: 100%;
                 transition: all .3s ease;

@@ -1,12 +1,12 @@
 <template>
-    <div v-if="shouldShowBar" class="free-trial-banner">
+    <div v-if="shouldShowBar || true" class="free-trial-banner">
         <h6 v-if="isActiveFreeSubscription">
             Your free trial {{ trialText }}, please upgrade
             <router-link :to="{ name: 'settingsCompaniesSubscriptions'}">
                 here
             </router-link>.
         </h6>
-        <h6 v-else-if="isActiveSubscription">
+        <h6 v-else-if="isActiveSubscription || true">
             Your subscription has expired.
             Please proceed to payment
             <router-link :to="{ name: 'settingsCompaniesSubscriptions'}">
@@ -67,7 +67,13 @@ export default {
 .free-trial-banner {
     background-color: var(--secondary-color);
     text-align: center;
-    padding: 15px;
+    z-index: 1001;
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     h6 {
         margin: 0;
